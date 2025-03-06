@@ -21,6 +21,8 @@ const QRScannerPage = () => {
 
         if (user) {
           setUserData(user);
+
+          console.log(user);
           setError("");
         } else {
           setUserData(null);
