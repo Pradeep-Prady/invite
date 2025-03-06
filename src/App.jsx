@@ -18,6 +18,7 @@ function App() {
       <QRCodePage />
 
       <Link to="/register">Register</Link>
+      <Link to="/scanner">Scanner</Link>
       <h2 className="text-xl font-bold mt-6">Registered Users</h2>
       <ul className="mt-4 w-80 bg-gray-100 p-4 rounded-lg shadow-lg">
         {users.length > 0 ? (
