@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { QrReader } from "react-qr-reader";
+import { QrReader } from "@blackbox-vision/react-qr-reader";
+
 
 const QRScannerPage = () => {
   const [scanResult, setScanResult] = useState("");
