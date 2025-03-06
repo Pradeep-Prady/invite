@@ -1,41 +1,43 @@
-import React, { useState } from "react";
-import { QrReader } from "@blackbox-vision/react-qr-reader";
-
+import React, { useState, useEffect } from "react";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
 const QRScannerPage = () => {
   const [scanResult, setScanResult] = useState("");
 
-  const handleScan = (data) => {
-    if (data) {
-      setScanResult(data);
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner("reader", {
+      fps: 10,
+      qrbox: { width: 250, height: 250 },
+    });
 
-      // Get users from localStorage
-      const users = JSON.parse(localStorage.getItem("users")) || [];
+    scanner.render(
+      (decodedText) => {
+        setScanResult(decodedText);
 
-      // Check if scanned QR code matches a registered user
-      const user = users.find((u) => u.id === data);
+        // Get users from localStorage
+        const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      if (user) {
-        alert(`User Verified: ${user.name}, ${user.email}`);
-      } else {
-        alert("User Not Found!");
+        // Check if scanned QR code matches a registered user
+        const user = users.find((u) => u.id === decodedText);
+
+        if (user) {
+          alert(`User Verified: ${user.name}, ${user.email}`);
+        } else {
+          alert("User Not Found!");
+        }
+      },
+      (errorMessage) => {
+        console.warn("QR scan error:", errorMessage);
       }
-    }
-  };
+    );
 
-  const handleError = (err) => {
-    console.error(err);
-  };
+    return () => scanner.clear();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h2 className="text-2xl font-bold mb-4">Scan QR Code</h2>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: "300px" }}
-      />
+      <div id="reader" className="w-64 h-64"></div>
       {scanResult && (
         <div className="mt-4 p-2 bg-gray-100 border rounded">
           <strong>Scanned Data:</strong> {scanResult}
