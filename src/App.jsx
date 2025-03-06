@@ -7,7 +7,6 @@ function App() {
 
   const [users, setUsers] = useState([]);
 
-  // Load users from localStorage when the component mounts
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
     setUsers(storedUsers);
