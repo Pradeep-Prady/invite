@@ -12,6 +12,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.0.9",
+    "@zxing/library": "^0.21.3",
     "html5-qrcode": "^2.3.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
