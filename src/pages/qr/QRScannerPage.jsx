@@ -62,6 +62,8 @@
 // };
 
 // export default QRScannerPage;
+
+
 import React, { useEffect, useState, useRef } from "react";
 import { BrowserMultiFormatReader } from "@zxing/library";
 
